@@ -1,23 +1,47 @@
-import Maven2.Excercises.Account;
-import Maven2.Excercises.Service;
-import junit.framework.Assert;
-import junit.framework.TestCase;
+package com.qa.test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-public class MainTest extends TestCase {
+import com.google.gson.Gson;
+import com.qa.domain.Account;
+import com.qa.domain.Service;
 
-	private Service service = new Service();
+public class MainTest {
 	
-    public void AddAccountTest() {
-    		
-    		int expected = 1;
-    		String actual = service.addAccount("Tiffany", "Yeung", "00001");
-    		Assert.assertEquals(expected, actual);
-    		
-    }
-    
-    public void GetAccountTest() {
-    		int actual = 1;
-		Account expected = service.getAccount(1);
-		Assert.assertEquals(expected, actual);
-    }
+		Service service = new Service();
+		
+	@Test
+	public void addAccountTest() {
+		Account Tiffany = new Account("Tiffany", "Yeung", 001);
+		service.addAccount(Tiffany);
+		Integer expected = 1;
+		Integer actual = service.getBankData().size();
+		assertEquals(expected,actual);
+	}
+	
+	public void addTwoSameAccountNumbersTest() {
+		Account Tiffany = new Account("Tiffany", "Yeung", 001);
+		Account Rachel = new Account("Rachel", "O Connell", 001);
+		service.addAccount(Tiffany);
+		service.addAccount(Rachel);
+		Integer expected = 1;
+		Integer actual = service.getBankData().size();
+		assertEquals(expected,actual);
+	}
+	
+	public void addTwoDifferentAccountNumbersTest() {
+		Account Tiffany = new Account("Tiffany", "Yeung", 001);
+		Account Rachel = new Account("Rachel", "O Connell", 002);
+		service.addAccount(Tiffany);
+		service.addAccount(Rachel);
+		Integer expected = 2;
+		Integer actual = service.getBankData().size();
+		assertEquals(expected,actual);
+	}
+	
+	//System.out.println("GSON:");
+	Gson gson = new Gson();
+	String json = gson.toJson(service.getBankData());
+	//System.out.println(json);
+	
 }
