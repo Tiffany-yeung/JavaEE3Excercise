@@ -1,6 +1,7 @@
-package Maven2.Excercises;
+package com.qa.domain;
 
 import java.util.Scanner;
+import com.google.gson.*;
 
 public class Main {
 
@@ -15,17 +16,22 @@ public class Main {
 		System.out.println("Please enter your last name:");
 		String lastNameInput = userInput.next();
 		System.out.println("Please enter your account number:");
-		String accountNoInput = userInput.next();
+		int accountNoInput = userInput.nextInt();
 		
 		Service service = new Service();
-		
-		service.addAccount(firstNameInput, lastNameInput, accountNoInput);
+		Account Tiffany = new Account(firstNameInput, lastNameInput, accountNoInput);
+		service.addAccount(Tiffany);
 		System.out.println("The key number to your new account is: " + (Service.keyNumber-1));
-		
 		
 		System.out.println("Please enter the key number to view data:");
 		int keyNumberInput = userInput.nextInt();
 
 		service.getAccount(keyNumberInput);
+		
+		System.out.println("");
+		System.out.println("GSON:");
+		Gson gson = new Gson();
+		String json = gson.toJson(service.getBankData());
+		System.out.println(json);
 	}
 }
