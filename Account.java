@@ -1,10 +1,10 @@
-package Maven2.Excercises;
+package com.qa.domain;
 
 public class Account {
     	
 	private String firstName;
 	private String lastName;
-	private String accountNo;
+	private int accountNo;
 	
 	public String getFirstName() {
 		return firstName;
@@ -14,12 +14,12 @@ public class Account {
 		return lastName;
 	}
 
-	public String getAccountNo() {
+	public int getAccountNo() {
 		return accountNo;
 	}
 
-	public Account (String firstName, String lastName, String accountNo) {
-		this.firstName = firstName;	//setters
+	public Account (String firstName, String lastName, int accountNo) {
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.accountNo = accountNo;
 	}
