@@ -1,4 +1,4 @@
-package Maven2.Excercises;
+package com.qa.domain;
 
 import java.util.HashMap;
 
@@ -6,19 +6,29 @@ public class Service {
 	
 		static int keyNumber = 1;
         
-		HashMap<Integer, Account> bankData = new HashMap<Integer, Account>();
+		private HashMap<Integer, Account> bankData = new HashMap<Integer, Account>();
 		
-		public String addAccount(String firstName, String lastName, String accountNo) {
+		public HashMap<Integer, Account> getBankData() {
+			return bankData;
+		}
+
+		public void setBankData(HashMap<Integer, Account> bankData) {
+			this.bankData = bankData;
+		}
+
+		public void addAccount(Account account) {
 			
-			Account account = new Account(firstName, lastName, accountNo);
-			bankData.put(keyNumber, account);
-			keyNumber++;
-			return firstName + " " + lastName + " " + accountNo;
+			if(bankData.containsKey(account.getAccountNo())) {
+				System.out.println("Account already exists.");
+			}
+			else {
+				bankData.put(keyNumber, account);
+				keyNumber++;
+			}
 		}
 		
 		public Account getAccount(int keyNumber) {
 			System.out.println(bankData.get(keyNumber));
-			//account.toString();
 			return bankData.get(keyNumber);
 		}
 }
